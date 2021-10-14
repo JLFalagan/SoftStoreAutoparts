@@ -1,4 +1,5 @@
-﻿using Common.Model.Entities;
+﻿using Common.Extension;
+using Common.Model.Entities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 

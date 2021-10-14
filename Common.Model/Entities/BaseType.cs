@@ -15,7 +15,8 @@ namespace Common.Model.Entities
             Name = name;
         }
 
-        [Index]
+        //[Index]
+        [Key]
         [Column(TypeName = "VARCHAR"), StringLength(256)]
         public string Name { get; set; }
 

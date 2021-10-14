@@ -32,7 +32,8 @@ namespace Common.Model
         /// </summary>
         /// <value>The key.</value>
         [StringLength(450)]
-        [Index(IsUnique = true)]
+        //[Index(IsUnique = true)]
+        [Key]
         public string Key { get; set; }
         /// <summary>Gets or sets the name property.</summary>
         /// <value>The name.</value>
