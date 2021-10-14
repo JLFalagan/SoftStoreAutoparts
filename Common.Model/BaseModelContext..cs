@@ -1,8 +1,5 @@
-﻿using Newtonsoft.Json;
-using NeyTI.Core.Common;
-using NeyTI.Core.Model.Config;
-using NeyTI.Core.Model.Entities;
-using NeyTI.Core.Model.Security;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

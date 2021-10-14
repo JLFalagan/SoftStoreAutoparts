@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Model;
+using Common.Model.Entities;
+using System.Linq.Expressions;
 
 namespace Common.Business
 {

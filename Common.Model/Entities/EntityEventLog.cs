@@ -1,6 +1,4 @@
-﻿
-using NeyTI.Core.Common;
-using NeyTI.Core.Model.Security;
+﻿using Common.Extension;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

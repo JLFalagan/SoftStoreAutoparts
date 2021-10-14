@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NeyTI.Core.Model.Entities;
+﻿using Common.Model.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

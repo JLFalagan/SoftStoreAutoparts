@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using NeyTI.Core.Common;
-using NeyTI.Core.Model.Entities;
+﻿using Common.Model.Entities;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Common.Model.Process

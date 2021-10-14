@@ -1,4 +1,4 @@
-﻿using NeyTI.Core.Model.Entities;
+﻿using Common.Model.Entities;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 

@@ -1,9 +1,9 @@
-﻿using NeyTI.Core.Model.Entities;
+﻿using Common.Model.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data.Entity;
 using System.Globalization;
 using System.IO;
 using System.Linq;
