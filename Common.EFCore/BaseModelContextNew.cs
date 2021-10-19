@@ -1,5 +1,4 @@
-﻿using Common.Model.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,10 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Common.Business;
+using Common.Model.Entities;
+using Common.Model.Security;
+using Common.Model.Process;
+using Common.Model;
 
-namespace Common.Model
+namespace Common.EFCore
 {
-    public class BaseModelContext : DbContext
+    public class BaseModelContextNew : DbContext
     {
         public BaseModelContext() : base(GetConnectionString())
         {
@@ -24,6 +28,7 @@ namespace Common.Model
         {
             this.SetCommandTimeOut(180);
         }
+
         public void SetCommandTimeOut(int timeout)
         {
             var objectContext = (this as IObjectContextAdapter).ObjectContext;
@@ -185,7 +190,7 @@ namespace Common.Model
                 }
                 long entityId = 0;
                 long.TryParse(primaryKey.ToString(), out entityId);
-                var log = new EntityEventLog(NeyTI.Core.Model.Entities.EventLogType.AddedId, entityType, entityId, System.Environment.MachineName);
+                var log = new EntityEventLog(Common.Model.Entities.EventLogType.AddedId, entityType, entityId, System.Environment.MachineName);
                 log.OldValues = JsonConvert.SerializeObject(oldValues, Formatting.Indented);
                 log.NewValues = JsonConvert.SerializeObject(newValues, Formatting.Indented);
                 //log.CreatorUserId = LoggedUserApp.Id;
@@ -222,7 +227,7 @@ namespace Common.Model
                 {
                     long entityId = 0;
                     long.TryParse(primaryKey.ToString(), out entityId);
-                    var log = new EntityEventLog(NeyTI.Core.Model.Entities.EventLogType.ModifiedId, entityType, entityId, System.Environment.MachineName);
+                    var log = new EntityEventLog(Common.Model.Entities.EventLogType.ModifiedId, entityType, entityId, System.Environment.MachineName);
                     log.OldValues = JsonConvert.SerializeObject(oldValues);
                     log.NewValues = JsonConvert.SerializeObject(newValues);
                     //log.CreatorUserId = LoggedUserApp.Id;
@@ -250,26 +255,25 @@ namespace Common.Model
 
 
         // Security
-        public DbSet<Core.Model.Security.AppUser> UserApp { get; set; }
-        public DbSet<Core.Model.Security.AppUserRole> AppUserRole { get; set; }
-        public DbSet<Core.Model.Security.AppRole> AppRole { get; set; }
-        public DbSet<Core.Model.Security.SecurityGroup> SecurityGroup { get; set; }
-        public DbSet<Core.Model.Security.SecurityItem> SecurityItem { get; set; }
-        public DbSet<Core.Model.Security.Permission> Permission { get; set; }
+        public DbSet<AppUser> UserApp { get; set; }
+        public DbSet<AppUserRole> AppUserRole { get; set; }
+        public DbSet<AppRole> AppRole { get; set; }
+        public DbSet<SecurityGroup> SecurityGroup { get; set; }
+        public DbSet<SecurityItem> SecurityItem { get; set; }
+        public DbSet<Permission> Permission { get; set; }
         //Audit
-        public DbSet<Core.Model.Entities.EventLogType> EventLogType { get; set; }
-        public DbSet<Core.Model.Entities.EntityEventLog> EntityEventLog { get; set; }
-        public DbSet<Core.Model.Entities.BusinessEventLog> BusinessEventLog { get; set; }
+        public DbSet<EventLogType> EventLogType { get; set; }
+        public DbSet<EntityEventLog> EntityEventLog { get; set; }
+        public DbSet<BusinessEventLog> BusinessEventLog { get; set; }
 
         // Batch Process
-        public DbSet<Process.BaseTask> BaseTask { get; set; }
-        public DbSet<Process.BaseTaskArgs> BaseTaskArgs { get; set; }
-        public DbSet<Process.TaskState> TaskState { get; set; }
+        public DbSet<BaseTask> BaseTask { get; set; }
+        public DbSet<BaseTaskArgs> BaseTaskArgs { get; set; }
+        public DbSet<TaskState> TaskState { get; set; }
         //public DbSet<Process.Batch> Batch { get; set; }
         //public DbSet<Process.BatchItemState> BatchItemState { get; set; }
 
         //Config
-
         public DbSet<SystemParameterGroup> SystemParameterGroup { get; set; }
         public DbSet<SystemParameter> SystemParameter { get; set; }
     }

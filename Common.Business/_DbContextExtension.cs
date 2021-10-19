@@ -16,7 +16,7 @@ namespace Common.Business
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
-            if (!(source is IDbAsyncEnumerable<TSource>))
+            if (!(source is IAsyncEnumerable<TSource>)) //IDbAsyncEnumerable - Version NetStandar
                 return Task.FromResult(source.ToList());
             return source.ToListAsync();
         }
@@ -25,8 +25,10 @@ namespace Common.Business
         {
             try
             {
-                context.Database.Connection.Open();
-                context.Database.Connection.Close();
+                //context.Database.Connection.Open(); - Version NetStandar
+                //context.Database.Connection.Close(); - Version NetStandar
+                context.Database.CanConnect();
+
                 return true;
             }
             catch
@@ -44,14 +46,21 @@ namespace Common.Business
 
         public static void Load(this DbContext ctx, ref AuditEntity entity, long id)
         {
-            var dbSet = ctx.Set(entity.GetType());
+            //var dbSet = ctx.Set(entity.GetType()); - Version NetStandar
+            var dbSet = ctx.Set<AuditEntity>();
             entity = (AuditEntity)dbSet.Find(id);
         }
 
-        public static async Task<AuditEntity> FindAsync(this DbContext ctx, Type type, long id)
+        //Version NetStandart
+        //public static async Task<AuditEntity> FindAsync(this DbContext ctx, Type type, long id)
+        //{
+        //    var dbSet = ctx.Set(type);
+        //    object result = await dbSet.FindAsync(id);
+        //    return result as AuditEntity;
+        //}
+        public static async Task<AuditEntity> FindAsync<T>(this DbContext ctx, long id) where T : AuditEntity
         {
-            var dbSet = ctx.Set(type);
-            object result = await dbSet.FindAsync(id);
+            object result = ctx.Set<T>().FindAsync(id);
             return result as AuditEntity;
         }
 
@@ -162,7 +171,6 @@ namespace Common.Business
                 return result.ToList<T>();
         }
 
-
         public static IList<T> Search<T>(this DbContext ctx, string filterBy, string filterValue, bool onlyEnabled, int take, bool asNotTracking, Expression<Func<T, bool>> where = null, params string[] includes) where T : AuditEntity
         {
             var result = ctx.Set<T>().Where(x => !onlyEnabled || (onlyEnabled && x.Enabled));
@@ -250,8 +258,45 @@ namespace Common.Business
 
             return result.ToList<T>();
         }
+ 
+        public static DateTime GetServerDate(this DbContext ctx) //BaseModelContext
+        {
+            //var dateQuery = ctx.Database.SqlQuery<DateTime>("SELECT GETDATE()");
+            //DateTime serverDate = dateQuery.AsEnumerable().First();
+            //return serverDate;
+            return DateTime.Now;
+        }
 
-        public static T GetOrDefineByName<T>(this DbContext ctx, string name, long id = 0) where T : BaseType
+        public static T Load<T>(this DbContext ctx, long id, params string[] includes) where T : AuditEntity
+        {
+            var result = ctx.Set<T>().Where(x => x.Id == id);
+            foreach (var include in includes)
+            {
+                result = result.Include(include);
+            }
+            return result.SingleOrDefault();
+        }
+
+        public static T Load<T>(this DbContext ctx, long id) where T : AuditEntity
+        {
+            var result = ctx.Set<T>().Where(x => x.Id == id);
+
+            return result.SingleOrDefault();
+        }
+
+        public static T SingleOrDefault<T>(this DbContext ctx, Expression<Func<T, bool>> predicate) where T : AuditEntity
+        {
+            var result = ctx.Set<T>().SingleOrDefault<T>(predicate);
+            return result;
+        }
+
+        public static T FirstOrDefault<T>(this DbContext ctx, Expression<Func<T, bool>> predicate) where T : AuditEntity
+        {
+            var result = ctx.Set<T>().FirstOrDefault<T>(predicate);
+            return result;
+        }
+
+        public static T GetOrDefineByName<T>(this DbContext ctx, string name, long id = 0, bool checkUnchanged = false) where T : BaseType
         {
             var aux = ctx.Set<T>().FirstOrDefault(x => x.Name == name);
             if (aux == null)
@@ -260,27 +305,46 @@ namespace Common.Business
                 aux.Name = name;
                 aux.Id = id;
                 ctx.Set<T>().Add(aux);
-                //ctx.SaveChanges();
+                ctx.SaveChanges();
             }
+            if (checkUnchanged)
+                ctx.Entry<T>(aux).State = EntityState.Unchanged;
+            return aux;
+        }
+
+        public static T GetOrDefineByName<T>(this DbContext ctx, string name) where T : BaseType
+        {
+            var aux = ctx.Set<T>().FirstOrDefault(x => x.Name == name);
+            if (aux == null)
+            {
+                aux = Activator.CreateInstance<T>();
+                aux.Name = name;
+                ctx.Set<T>().Add(aux);
+                ctx.SaveChanges();
+            }
+            ctx.Entry<T>(aux).State = EntityState.Unchanged;
             return aux;
         }
 
         public static void Save(this DbContext ctx, AuditEntity entity)
         {
             if (entity.IsNew)
-                ctx.Set(entity.GetType()).Add(entity);
+            {
+                //ctx.Set(entity.GetType()).Add(entity); - Version NetStandar
+                ctx.Set<AuditEntity>().Add(entity);
+            }
             else
             {
                 ctx.Entry(entity).State = EntityState.Modified;
             }
 
-            //ctx.SaveChanges();
+            ctx.SaveChanges();
         }
 
         public static void Delete(this DbContext ctx, AuditEntity entity)
         {
             ctx.Entry(entity).State = EntityState.Deleted;
-            //ctx.SaveChanges();
+            ctx.SaveChanges();
         }
     }
 }

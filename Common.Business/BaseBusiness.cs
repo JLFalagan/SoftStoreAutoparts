@@ -20,25 +20,30 @@ namespace Common.Business
             return Activator.CreateInstance(type) as I;
         }
 
-        internal static BaseModelContext CreateDbContext()
+        internal static DbContext CreateDbContext() //BaseModelContext
         {
-            var dbContextType = ConfigurationManager.AppSettings["NeyTI.DbContextType"].Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            //Version NetStandar
+            //var dbContextType = ConfigurationManager.AppSettings["NeyTI.DbContextType"].Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            string[] dbContextType = new string[] { "NeyTI.DbContextType", ", " }; //Implementar lectura por Json o Recursos de parametros
             string assemblyPath = $@"{Environment.CurrentDirectory}\{dbContextType[1]}.dll";
-            return CreateInstance<BaseModelContext>(dbContextType[0], assemblyPath);
+            return CreateInstance<DbContext>(dbContextType[0], assemblyPath);
         }
 
-        public static void Save(this AuditEntity entity, BaseModelContext ctx)
+        public static void Save(this AuditEntity entity, DbContext ctx) //BaseModelContext - Version NetStandar
         {
-            if (entity.IsNew)
-                ctx.Set(entity.GetType()).Add(entity);
+            //if (entity.IsNew)
+            //    ctx.Set(entity.GetType()).Add(entity);
 
-            //ctx.SaveChanges();
+            if (entity.IsNew)
+                ctx.Set<AuditEntity>().Add(entity);
+
+            ctx.SaveChanges();
         }
 
         public static void Delete(this AuditEntity entity, DbContext ctx)
         {
             ctx.Entry(entity).State = EntityState.Deleted;
-            //ctx.SaveChanges();
+            ctx.SaveChanges();
         }
 
     }

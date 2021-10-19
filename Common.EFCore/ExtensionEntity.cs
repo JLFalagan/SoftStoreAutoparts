@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 //using Z.Expressions;
 
-namespace Common.Model
+namespace Common.EFCore
 {
     public static class ExtensionEntity
     {

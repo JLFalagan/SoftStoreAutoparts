@@ -1,5 +1,7 @@
-﻿using Common.Model;
+﻿using Common.Extension;
+using Common.Model;
 using Common.Model.Security;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +25,6 @@ namespace Common.Business
                 }
 
                 return retVal;
-
-
             }
             catch (Exception)
             {
@@ -33,7 +33,7 @@ namespace Common.Business
             }
         }
 
-        public static void Save(this AppUser entity, BaseModelContext ctx)
+        public static void Save(this AppUser entity, DbContext ctx) //BaseModelContext - Version NetStandar
         {
             var other = ctx.SingleOrDefault<AppUser>(x => x.UserName == entity.UserName);
             if (other != null && !entity.Equals(other))
@@ -45,8 +45,10 @@ namespace Common.Business
             //    throw new BusinessException("Debe seleccionar un Rol de Seguridad.");
             //}
 
+            //if (entity.IsNew)
+            //    ctx.Set(entity.GetType()).Add(entity);
             if (entity.IsNew)
-                ctx.Set(entity.GetType()).Add(entity);
+                ctx.Set<AppUser>().Add(entity);
             else
             {
                 var childDb1 = ctx.Set<AppUserAppUserRole>();
@@ -57,7 +59,7 @@ namespace Common.Business
                 childDb2.RemoveRange(items2);
             }
 
-            //ctx.SaveChanges();
+            ctx.SaveChanges();
         }
 
         public static void Delete(this AppUser entity, DbContext ctx)
@@ -66,7 +68,7 @@ namespace Common.Business
             var childDb = ctx.Set<AppUserAppUserRole>();
             childDb.RemoveRange(delete.UserRoles);
             ctx.Set<AppUser>().Remove(delete);
-            //ctx.SaveChanges();
+            ctx.SaveChanges();
         }
 
         public static AppUser Validate(string username, string password)
@@ -110,23 +112,26 @@ namespace Common.Business
             return true;
         }
 
-        public static void Save(this AppUserRole entity, BaseModelContext ctx)
+        public static void Save(this AppUserRole entity, DbContext ctx) //BaseModelContext - Version NetStandar
         {
             var other = ctx.SingleOrDefault<AppUserRole>(x => x.Name == entity.Name);
             if (other != null && !entity.Equals(other))
                 throw new BusinessException("Ya existe un Rol con el mismo nombre.");
 
+            //if (entity.IsNew)
+            //    ctx.Set(entity.GetType()).Add(entity);
             if (entity.IsNew)
-                ctx.Set(entity.GetType()).Add(entity);
+                ctx.Set<AppUserRole>().Add(entity);
             else
             {
                 var childDb = ctx.Set<AppUserAppUserRole>();
                 var items = childDb.Local.Where(x => x.Role == null).ToList();
                 childDb.RemoveRange(items);
             }
-            //ctx.SaveChanges();
+
+            ctx.SaveChanges();
         }
-        public static void Delete(this AppUserRole entity, BaseModelContext ctx)
+        public static void Delete(this AppUserRole entity, DbContext ctx) //BaseModelContext
         {
             var reference = ctx.Set<AppUser>().Where(x => x.UserRoles.Any(y => y.RoleId == entity.Id)).Count();
             if (reference > 0)
@@ -137,7 +142,7 @@ namespace Common.Business
             child1Db.RemoveRange(delete.Permissions);
             ctx.Set<AppUserRole>().Remove(delete);
         }
-        public static AppUserRole CloneRoleApp(long RoleAppId, BaseModelContext ctx)
+        public static AppUserRole CloneRoleApp(long RoleAppId, DbContext ctx) //BaseModelContext
         {
             var entity = ctx.Set<AppUserRole>().Find(RoleAppId);
 
@@ -158,7 +163,7 @@ namespace Common.Business
             return roleAppClone;
         }
 
-        public static void Save(this SecurityGroup entity, BaseModelContext ctx)
+        public static void Save(this SecurityGroup entity, DbContext ctx) //BaseModelContext - Version NetStandar
         {
             var other = ctx.SingleOrDefault<SecurityGroup>(x => x.Name == entity.Name);
             if (other != null && !entity.Equals(other))
@@ -185,19 +190,24 @@ namespace Common.Business
 
             child1Db.RemoveRange(items1);
 
+            //if (entity.IsNew)
+            //    ctx.Set(entity.GetType()).Add(entity);
             if (entity.IsNew)
-                ctx.Set(entity.GetType()).Add(entity);
-            //ctx.SaveChanges();
+                ctx.Set<SecurityGroup>().Add(entity);
+
+            ctx.SaveChanges();
         }
 
-        public static void Save(this SystemParameter entity, BaseModelContext ctx)
+        public static void Save(this SystemParameter entity, DbContext ctx) //BaseModelContext - Version NetStandar
         {
             var other = ctx.SingleOrDefault<SystemParameter>(x => x.Key == entity.Key);
             if (other != null && !entity.Equals(other))
                 throw new BusinessException("Ya existe un Parámetro con la misma Clave.");
 
+            //if (entity.IsNew)
+            //    ctx.Set(entity.GetType()).Add(entity);
             if (entity.IsNew)
-                ctx.Set(entity.GetType()).Add(entity);
+                ctx.Set<SystemParameter>().Add(entity);
         }
     }
 }
