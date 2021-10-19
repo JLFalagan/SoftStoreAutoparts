@@ -6,4 +6,13 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.WebApi\Common.WebApi.csproj" />
+    <ProjectReference Include="..\SoftStoreAutoparts.API\SoftStoreAutoparts.API.csproj" />
+  </ItemGroup>
+
 </Project>

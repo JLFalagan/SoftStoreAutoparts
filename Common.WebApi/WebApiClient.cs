@@ -81,15 +81,25 @@ namespace Common.WebApi
 
         public object Get(string resource)
         {
-            var request = new RestRequest(resource, Method.GET);
-            var response = client.Execute(request);
-            if (response.IsSuccessful)
-                return response.Content;
-            else
+            try
             {
-                var errorDto = JsonConvert.DeserializeObject<ExceptionDto>(response.Content);
-                throw new FriendlyException(errorDto.Message);
+                var request = new RestRequest(resource, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+                var response = client.Execute(request);
+                if (response.IsSuccessful)
+                    return response.Content;
+                else
+                {
+                    var errorDto = JsonConvert.DeserializeObject<ExceptionDto>(response.Content);
+                    throw new FriendlyException(errorDto.Message);
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
 
         public T Get<T>(string resource) where T : new()

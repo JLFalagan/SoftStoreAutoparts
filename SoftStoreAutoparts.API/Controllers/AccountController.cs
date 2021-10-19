@@ -32,6 +32,15 @@ namespace SoftStoreAutoparts.API.Controllers
             this.configuration = configuration;
         }
 
+
+
+        [Route("EchoPing")]
+        [HttpGet]
+        public async Task<ActionResult> EchoPing()
+        {
+            return Ok(true);
+        }
+
         [Route("Create")]
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] UserInfo model)
