@@ -1,6 +1,7 @@
 ﻿using Common.Business;
 using Common.Model;
 using Common.Model.Entities;
+using Common.Model.Log;
 using Common.Model.Process;
 using Common.Model.Security;
 using Microsoft.EntityFrameworkCore;

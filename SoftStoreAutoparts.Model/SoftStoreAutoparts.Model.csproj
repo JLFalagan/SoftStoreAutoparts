@@ -4,4 +4,35 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Entidades\ModClientes\**" />
+    <Compile Remove="Entidades\ModCompras\**" />
+    <Compile Remove="Entidades\ModProveedores\**" />
+    <Compile Remove="Entidades\ModUsuarios\**" />
+    <Compile Remove="Entidades\ModVentas\**" />
+    <EmbeddedResource Remove="Entidades\ModClientes\**" />
+    <EmbeddedResource Remove="Entidades\ModCompras\**" />
+    <EmbeddedResource Remove="Entidades\ModProveedores\**" />
+    <EmbeddedResource Remove="Entidades\ModUsuarios\**" />
+    <EmbeddedResource Remove="Entidades\ModVentas\**" />
+    <None Remove="Entidades\ModClientes\**" />
+    <None Remove="Entidades\ModCompras\**" />
+    <None Remove="Entidades\ModProveedores\**" />
+    <None Remove="Entidades\ModUsuarios\**" />
+    <None Remove="Entidades\ModVentas\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Model\Common.Model.csproj" />
+  </ItemGroup>
+
 </Project>

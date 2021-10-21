@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Common.Model.Process
 {
-    public class TaskState : BaseType
+    public class TaskState : BaseTypeAudit
     {
         /// <summary>
         /// The task has been initialized but has not yet been scheduled.

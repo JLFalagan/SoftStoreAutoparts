@@ -22,4 +22,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SoftStoreAutoparts.Model\SoftStoreAutoparts.Model.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Common.Model.Entities;
+using Common.Model.Log;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

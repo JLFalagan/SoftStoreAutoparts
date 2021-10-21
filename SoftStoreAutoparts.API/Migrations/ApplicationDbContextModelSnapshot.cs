@@ -236,6 +236,501 @@ namespace SoftStoreAutoparts.API.Migrations
                     b.ToTable("TestClassModel");
                 });
 
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Category", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Hall", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hall");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Product", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("BrandId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("ColorId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Gain")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<double>("PricePurchase")
+                        .HasColumnType("float");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalOutWithIVA")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalWithIVA")
+                        .HasColumnType("float");
+
+                    b.Property<long>("TypeId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductBrand", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductBrand");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductColor", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CodeColor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<byte[]>("FileImageColor")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductColor");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductImage", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<byte[]>("FileImage")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<long?>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImage");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductSource", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<long>("ShelfId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("ShelfId");
+
+                    b.ToTable("ProductSource");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductType", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("CategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("ProductType");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductVehicle", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<long>("VehicleId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("ProductVehicle");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Segment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Information")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Segment");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Shelf", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("HallId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HallId");
+
+                    b.ToTable("Shelf");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.TechnicalData", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DataValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Magnitude")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("TechnicalData");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Vehicle", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("BrandId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Doors")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<long>("SegmentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TypeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("SegmentId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("Vehicle");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.VehicleBrand", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<byte[]>("FileImageBrand")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VehicleBrand");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.VehicleDoor", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VehicleDoor");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.VehicleType", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VehicleType");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -285,6 +780,175 @@ namespace SoftStoreAutoparts.API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Product", b =>
+                {
+                    b.HasOne("SoftStoreAutoparts.Model.ProductBrand", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SoftStoreAutoparts.Model.ProductColor", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SoftStoreAutoparts.Model.ProductType", "Type")
+                        .WithMany("Products")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Color");
+
+                    b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductImage", b =>
+                {
+                    b.HasOne("SoftStoreAutoparts.Model.Product", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductSource", b =>
+                {
+                    b.HasOne("SoftStoreAutoparts.Model.Product", "Product")
+                        .WithMany("Shelves")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SoftStoreAutoparts.Model.Shelf", "Shelf")
+                        .WithMany("Products")
+                        .HasForeignKey("ShelfId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Shelf");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductType", b =>
+                {
+                    b.HasOne("SoftStoreAutoparts.Model.Category", "Category")
+                        .WithMany("ProductTypes")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductVehicle", b =>
+                {
+                    b.HasOne("SoftStoreAutoparts.Model.Product", "Product")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SoftStoreAutoparts.Model.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Shelf", b =>
+                {
+                    b.HasOne("SoftStoreAutoparts.Model.Hall", "Hall")
+                        .WithMany("Shelves")
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hall");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.TechnicalData", b =>
+                {
+                    b.HasOne("SoftStoreAutoparts.Model.Product", null)
+                        .WithMany("TechnicalDatas")
+                        .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Vehicle", b =>
+                {
+                    b.HasOne("SoftStoreAutoparts.Model.VehicleBrand", "Brand")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SoftStoreAutoparts.Model.Segment", "Segment")
+                        .WithMany()
+                        .HasForeignKey("SegmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SoftStoreAutoparts.Model.VehicleType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Segment");
+
+                    b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Category", b =>
+                {
+                    b.Navigation("ProductTypes");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Hall", b =>
+                {
+                    b.Navigation("Shelves");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Product", b =>
+                {
+                    b.Navigation("Images");
+
+                    b.Navigation("Shelves");
+
+                    b.Navigation("TechnicalDatas");
+
+                    b.Navigation("Vehicles");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductBrand", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.ProductType", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.Shelf", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("SoftStoreAutoparts.Model.VehicleBrand", b =>
+                {
+                    b.Navigation("Vehicles");
                 });
 #pragma warning restore 612, 618
         }

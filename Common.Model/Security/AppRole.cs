@@ -10,7 +10,7 @@ namespace Common.Model.Security
     /// <summary>
     /// Rol / Funcion de la aplicacion
     /// </summary>
-    public class AppRole : BaseType
+    public class AppRole : BaseTypeAudit
     {
         public virtual IList<AppUserAppRole> Users { get; set; }
     }

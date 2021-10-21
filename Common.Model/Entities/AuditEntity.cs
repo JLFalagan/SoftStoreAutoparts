@@ -8,15 +8,13 @@ using System.Text;
 
 namespace Common.Model.Entities
 {
-    
+    //TODO: REVISAR para que se usa el disableDelete
     public abstract class AuditEntity : BaseEntity, INotifyPropertyChanged
     {
-
         public AuditEntity(bool disableDelete = false) : base(disableDelete)
         {
             Created = DateTime.Now;
         }
-
 
         //public virtual long? CreatorUserId { get; set; }
         //public virtual AppUser CreatorUser { get; set; }
@@ -25,8 +23,10 @@ namespace Common.Model.Entities
 
         [Column(TypeName = "VARCHAR"), StringLength(64)]
         public string CreatedBy { get; set; }
+
         [Column(TypeName = "VARCHAR"), StringLength(64)]
         public string UpdatedBy { get; set; }
+
         [Column(TypeName = "VARCHAR"), StringLength(64)]
         public string DeletedBy { get; set; }
 
@@ -35,7 +35,5 @@ namespace Common.Model.Entities
         public virtual DateTime? Updated { get; set; }
 
         public virtual DateTime? Deleted { get; set; }
-
-        
     }
 }

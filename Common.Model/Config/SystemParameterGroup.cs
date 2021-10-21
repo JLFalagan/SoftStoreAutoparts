@@ -12,7 +12,7 @@ namespace Common.Model
     /// <code>var Group = new SystemParameterGroup();
     /// Group.Parameters.Add(new SystemParameter());</code></example>
     /// <seealso cref="NeyTI.Core.Model.Entities.BaseType" />
-    public class SystemParameterGroup : BaseType
+    public class SystemParameterGroup : BaseTypeAudit
     {
         /// <summary>Initializes a new instance of the <see cref="SystemParameterGroup"/> class.</summary>
         public SystemParameterGroup()

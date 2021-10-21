@@ -7,7 +7,7 @@ namespace Common.Model.Security
     /// <summary>
     /// Rol de usuario de la aplicacion
     /// </summary>
-    public class AppUserRole : BaseType
+    public class AppUserRole : BaseTypeAudit
     {
         /// <summary>The system admin
         /// user for default</summary>

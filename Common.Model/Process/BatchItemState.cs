@@ -2,7 +2,7 @@
 
 namespace Common.Model.Process
 {
-    public class BatchItemState : BaseType
+    public class BatchItemState : BaseTypeAudit
     {
         public const long PendingId = 1;
         public const long ProcessedId = 2;

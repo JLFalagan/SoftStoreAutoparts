@@ -296,7 +296,7 @@ namespace Common.Business
             return result;
         }
 
-        public static T GetOrDefineByName<T>(this DbContext ctx, string name, long id = 0, bool checkUnchanged = false) where T : BaseType
+        public static T GetOrDefineByName<T>(this DbContext ctx, string name, long id = 0, bool checkUnchanged = false) where T : BaseTypeAudit
         {
             var aux = ctx.Set<T>().FirstOrDefault(x => x.Name == name);
             if (aux == null)
@@ -312,7 +312,7 @@ namespace Common.Business
             return aux;
         }
 
-        public static T GetOrDefineByName<T>(this DbContext ctx, string name) where T : BaseType
+        public static T GetOrDefineByName<T>(this DbContext ctx, string name) where T : BaseTypeAudit
         {
             var aux = ctx.Set<T>().FirstOrDefault(x => x.Name == name);
             if (aux == null)
