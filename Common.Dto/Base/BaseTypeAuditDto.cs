@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Dto
+namespace Common.Dto.Base
 {
-    public abstract class BaseTypeDto<T> : BaseEntityNotifyDto<T>
+    public abstract class BaseTypeAuditDto<T> : AuditEntityDto<T>
     {
-        public BaseTypeDto() : base()
+        public BaseTypeAuditDto() : base()
         {
             EnableName = false;
         }
 
-        public BaseTypeDto(bool enableNotify = false) : base(enableNotify)
+        public BaseTypeAuditDto(bool enableNotify = false) : base(enableNotify)
         {
             EnableName = enableNotify;
         }
 
-        public BaseTypeDto(bool enableNotify = false, bool enableBaseNotify = false) : base(enableBaseNotify)
+        public BaseTypeAuditDto(bool enableNotify = false, bool enableBaseNotify = false) : base(enableBaseNotify)
         {
             EnableName = enableNotify;
         }

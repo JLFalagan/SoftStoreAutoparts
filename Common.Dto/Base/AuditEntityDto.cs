@@ -8,29 +8,154 @@ using System.Threading.Tasks;
 
 namespace Common.Dto
 {
-    public abstract class AuditEntityDto : BaseEntityDto
+    public abstract class AuditEntityDto<T> : BaseEntityNotifyDto<T>
     {
-        public AuditEntityDto()
+        //Constructor Default, con las notificaciones this y base deshabilitadas
+        public AuditEntityDto() : base()
         {
-            Enabled = true;
+            EnableCreatedBy = false;
+            EnableUpdatedBy = false;
+            EnableDeletedBy = false;
+            EnableCreated = false;
+            EnableUpdated = false;
+            EnableDeleted = false;
         }
 
-        [JsonIgnore]
-        public Guid Guid { get; set; }
+        //Constructor con las notificaciones this y base habilitadas
+        public AuditEntityDto(bool enableNotify = false) : base(enableNotify)
+        {
+            EnableCreatedBy = enableNotify;
+            EnableUpdatedBy = enableNotify;
+            EnableDeletedBy = enableNotify;
+            EnableCreated = enableNotify;
+            EnableUpdated = enableNotify;
+            EnableDeleted = enableNotify;
+        }
 
-        //public byte[] RowVersion { get; set; }
+        //Constructor con las notificaciones this y base habilitadas de manera independiente
+        public AuditEntityDto(bool enableAuditNotify = false, bool enableBaseNotify = false) : base(enableBaseNotify)
+        {
+            EnableCreatedBy = enableAuditNotify;
+            EnableUpdatedBy = enableAuditNotify;
+            EnableDeletedBy = enableAuditNotify;
+            EnableCreated = enableAuditNotify;
+            EnableUpdated = enableAuditNotify;
+            EnableDeleted = enableAuditNotify;
+        }
 
-        public bool Enabled { get; set; }
+        public void EnableNotify(bool enableAuditNotify = false, bool enableBaseNotify = false)
+        {
+            base.EnableNotifyGuid = enableBaseNotify;
+            base.EnableNotifyEnabled = enableBaseNotify;
+            base.EnableNotifyIsNew = enableBaseNotify;
+            base.EnableNotifyDisplay = enableBaseNotify;
 
-        //public virtual long? CreatorUserId { get; set; }
+            EnableCreatedBy = enableAuditNotify;
+            EnableUpdatedBy = enableAuditNotify;
+            EnableDeletedBy = enableAuditNotify;
+            EnableCreated = enableAuditNotify;
+            EnableUpdated = enableAuditNotify;
+            EnableDeleted = enableAuditNotify;
+        }
 
-        //public long? UpdaterUserId { get; set; }
+        //[JsonIgnore]
+        //public override Guid Guid { get; set; }
 
-        //public DateTime Created { get; set; }
+        private string createdBy;
+        private string updatedBy;
+        private string deletedBy;
+        private DateTime created;
+        private DateTime? updated;
+        private DateTime? deleted;
 
-        //public DateTime? Updated { get; set; }
+        public bool EnableCreatedBy { private get; set; }
+        public virtual string CreatedBy 
+        {
+            get => createdBy;
+            set
+            {
+                if (value != createdBy && EnableCreatedBy)
+                {
+                    createdBy = value;
+                    NotifyPropertyChanged();
+                }
+                else createdBy = value;
+            }
+        }
 
-        //public DateTime? Deleted { get; set; }
+        public bool EnableUpdatedBy { private get; set; }
+        public virtual string UpdatedBy
+        {
+            get => updatedBy;
+            set
+            {
+                if (value != updatedBy && EnableUpdatedBy)
+                {
+                    updatedBy = value;
+                    NotifyPropertyChanged();
+                }
+                else updatedBy = value;
+            }
+        }
 
+        public bool EnableDeletedBy { private get; set; }
+        public virtual string DeletedBy
+        {
+            get => deletedBy;
+            set
+            {
+                if (value != deletedBy && EnableDeletedBy)
+                {
+                    deletedBy = value;
+                    NotifyPropertyChanged();
+                }
+                else deletedBy = value;
+            }
+        }
+
+        public bool EnableCreated { private get; set; }
+        public virtual DateTime Created
+        {
+            get => created;
+            set
+            {
+                if (value != created && EnableCreated)
+                {
+                    created = value;
+                    NotifyPropertyChanged();
+                }
+                else created = value;
+            }
+        }
+
+        public bool EnableUpdated { private get; set; }
+        public virtual DateTime? Updated
+        {
+            get => updated;
+            set
+            {
+                if (value != updated && EnableUpdated)
+                {
+                    updated = value;
+                    NotifyPropertyChanged();
+                }
+                else updated = value;
+            }
+        }
+
+        public bool EnableDeleted { private get; set; }
+        public virtual DateTime? Deleted
+        {
+            get => deleted;
+            set
+            {
+                if (value != deleted && EnableDeleted)
+                {
+                    deleted = value;
+                    NotifyPropertyChanged();
+                }
+                else deleted = value;
+            }
+        }
     }
 }

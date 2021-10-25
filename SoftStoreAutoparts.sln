@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Model", "Common.Mode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Extension", "Common.Extension\Common.Extension.csproj", "{1E62EF0F-6E3C-48A7-BEC8-FE4362B185D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.EFCore", "Common.EFCore\Common.EFCore.csproj", "{79CADEDA-54CA-454C-88BB-A0B7E5BC6682}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.EFCore", "Common.EFCore\Common.EFCore.csproj", "{79CADEDA-54CA-454C-88BB-A0B7E5BC6682}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftStoreAutoparts.Dto", "SoftStoreAutoparts.Dto\SoftStoreAutoparts.Dto.csproj", "{422D1238-06AE-4820-9F21-50E75F0D6325}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{79CADEDA-54CA-454C-88BB-A0B7E5BC6682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79CADEDA-54CA-454C-88BB-A0B7E5BC6682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79CADEDA-54CA-454C-88BB-A0B7E5BC6682}.Release|Any CPU.Build.0 = Release|Any CPU
+		{422D1238-06AE-4820-9F21-50E75F0D6325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{422D1238-06AE-4820-9F21-50E75F0D6325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{422D1238-06AE-4820-9F21-50E75F0D6325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{422D1238-06AE-4820-9F21-50E75F0D6325}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

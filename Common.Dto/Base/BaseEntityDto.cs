@@ -8,39 +8,25 @@ using System.Threading.Tasks;
 
 namespace Common.Dto
 {
-    public abstract class BaseEntityDto : IEntity
+    public abstract class BaseEntityDto<T>
     {
-        public BaseEntityDto()
-        {
-            this.Id = GenerateTempId();
-        }
-        public long Id { get; set; }
+        public virtual T Id { get; set; }
+        public virtual Guid Guid { get; set; }
+        public virtual bool Enabled { get; set; }
+        public virtual bool IsNew { get; set; }
+        public virtual string Display { get; set; }
 
-
-        [JsonIgnore]
-        public virtual bool IsNew
-        {
-            get
-            {
-                return Id <= 0;
-            }
-        }
-
-        private int GenerateTempId()
-        {
-            return Math.Abs(Guid.NewGuid().GetHashCode()) * -1;
-        }
-
-        //public virtual string Display
+        //public BaseEntityDto()
         //{
-        //    get { return ToString(); }
+        //    this.Id = GenerateTempId();
         //}
 
-        //public override string ToString()
+        //private int GenerateTempId()
         //{
-        //    return Id.ToString();
+        //    return Math.Abs(Guid.NewGuid().GetHashCode()) * -1;
         //}
-        public string Display { get; set; }
 
+        //[JsonIgnore]
+        //public virtual bool IsNew => Id <= 0;
     }
 }
