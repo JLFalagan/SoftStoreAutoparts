@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public class PermissionDto : AuditEntityDto
+    public class PermissionDto : AuditEntityDto<long>
     {
         public long RoleId { get; set; }
 

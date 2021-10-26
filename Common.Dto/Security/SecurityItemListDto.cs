@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public class SecurityItemListDto : IEntity
+    public class SecurityItemListDto : IKey<long>
     {
         public long Id { get; set; }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public class ReportDocumentFormatDto :  BaseTypeDto
+    public class ReportDocumentFormatDto : BaseTypeDto<long>
     {
 
         public const long PdfId = 1;

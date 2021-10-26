@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Common.Dto
 {
-    public class FileDto : AuditEntityDto
+    public class FileDto : AuditEntityDto<long>
     {
         public string Name { get; set; }
 

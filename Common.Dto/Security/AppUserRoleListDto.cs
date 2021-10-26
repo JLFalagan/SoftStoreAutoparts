@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public class AppUserRoleListDto : IEntity
+    public class AppUserRoleListDto : IKey<long>
     {
         public long Id { get; set; }
 

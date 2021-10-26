@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public class AppRoleListDto : IEntity, ISelectedItemOfCollection
+    public class AppRoleListDto : IKey<long>, ISelectedItemOfCollection
     {
         public long Id { get; set; }
 

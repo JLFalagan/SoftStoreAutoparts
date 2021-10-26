@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public class AppUserRoleDto : BaseTypeDto
+    public class AppUserRoleDto : BaseTypeDto<long>
     {
         /// <summary>The system admin
         /// user for default</summary>

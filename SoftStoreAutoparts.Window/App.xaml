@@ -4,6 +4,281 @@
              xmlns:local="clr-namespace:SoftStoreAutoparts.Window"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!--Indice de Estilos-->
+        <!--StyleBotoLateral            Estilo Aero para botones, apariencia de Windows Essential-->
+        <!--EstiloCabecera              Estilo para cabeceras de tablas (DataGrid), apariencia Windows Messenger 2005-->
+        <!--GridSplitterPreviewStyle    Estilo de separador interactivo, apariencia Windows Wave-->
+
+        <!--ESTILO BOTON LATERAL AERO-->
+        <Style x:Key="StyleBotoLateral" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border x:Name="BOR1" BorderBrush="#FFFFB700" BorderThickness="1" HorizontalAlignment="Stretch" Margin="0" Width="Auto" Background="{x:Null}" CornerRadius="1" Opacity="0"/>
+                            <Rectangle x:Name="REC1" Fill="{x:Null}" RadiusY="1" RadiusX="1" Stroke="{x:Null}" Margin="1"/>
+                            <Rectangle x:Name="REC2" RadiusY="1" RadiusX="1" Stroke="White" Margin="1" Opacity="0">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="White" Offset="1"/>
+                                        <GradientStop Color="#FFFDEAD6" Offset="0.36"/>
+                                        <GradientStop Color="#FFFFCE69" Offset="0.369"/>
+                                        <GradientStop Color="#FFFFEB93" Offset="0.974"/>
+                                        <GradientStop Color="#FFFDEAD6" Offset="0.046"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Rectangle x:Name="REC3" RadiusY="1" RadiusX="1" Stroke="{x:Null}" Margin="1" Opacity="0">
+                                <Rectangle.Fill>
+                                    <RadialGradientBrush RadiusY="0.287" Center="0.502,1.008" GradientOrigin="0.502,1.008" RadiusX="0.506">
+                                        <GradientStop Color="White" Offset="0.114"/>
+                                        <GradientStop Offset="1"/>
+                                    </RadialGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Opacity" TargetName="BOR1" Value="1"/>
+                                <Setter Property="Opacity" TargetName="REC2" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" TargetName="BOR1" Value="1"/>
+                                <Setter Property="Opacity" TargetName="REC2" Value="1"/>
+                                <Setter Property="Opacity" TargetName="REC3" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" TargetName="BOR1" Value="1"/>
+                                <Setter Property="Opacity" TargetName="REC2" Value="1"/>
+                                <Setter Property="Opacity" TargetName="REC3" Value="1"/>
+                                <Setter Property="Fill" TargetName="REC3">
+                                    <Setter.Value>
+                                        <RadialGradientBrush Center="0.502,1.008" GradientOrigin="0.502,1.008" RadiusY="0.965" RadiusX="0.506">
+                                            <GradientStop Color="White" Offset="0.114"/>
+                                            <GradientStop Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Fill" TargetName="REC2">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="White" Offset="0"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                            <GradientStop Color="#FFFDEAD6" Offset="0.36"/>
+                                            <GradientStop Color="#FFFFB700" Offset="0.369"/>
+                                            <GradientStop Color="#FFFFEB93" Offset="0.974"/>
+                                            <GradientStop Color="#FFFDEAD6" Offset="0.046"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Stroke" TargetName="REC2" Value="#FFFFB700"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--ESTILO TOGGLEBUTTON AERO-->
+        <Style x:Key="EstiloToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid>
+                            <Rectangle x:Name="REC1" Fill="{x:Null}" RadiusY="5" RadiusX="5" Stroke="{x:Null}"/>
+                            <Rectangle x:Name="REC2" Fill="#FFF4F4F5" RadiusY="5" RadiusX="5" Stroke="Black" Opacity="0"/>
+                            <Rectangle x:Name="REC3" Fill="#FFF4F4F5" RadiusY="5" RadiusX="5" Stroke="Black" Opacity="0"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Opacity" TargetName="REC2" Value="1"/>
+                                <Setter Property="Stroke" TargetName="REC2" Value="#FFFFB700"/>
+                                <Setter Property="Fill" TargetName="REC2">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="White" Offset="0"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                            <GradientStop Color="#FFFDEAD6" Offset="0.046"/>
+                                            <GradientStop Color="#FFFFEB93" Offset="0.974"/>
+                                            <GradientStop Color="#FFFDEAD6" Offset="0.36"/>
+                                            <GradientStop Color="#FFFFCE69" Offset="0.369"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Stroke" TargetName="REC3" Value="#FFFFB700"/>
+                                <Setter Property="Fill" TargetName="REC3">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="White" Offset="0"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                            <GradientStop Color="#FFFDEAD6" Offset="0.046"/>
+                                            <GradientStop Color="#FFFFEB93" Offset="0.974"/>
+                                            <GradientStop Color="#FFFDEAD6" Offset="0.36"/>
+                                            <GradientStop Color="#FFFFCE69" Offset="0.369"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Opacity" TargetName="REC3" Value="0"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" TargetName="REC3" Value="0.5"/>
+                                <Setter Property="Stroke" TargetName="REC3" Value="#FFFFB700"/>
+                                <Setter Property="Fill" TargetName="REC3">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="White" Offset="0"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                            <GradientStop Color="#FFFDEAD6" Offset="0.046"/>
+                                            <GradientStop Color="#FFFDEAD6" Offset="0.36"/>
+                                            <GradientStop Color="#FFFFCE69" Offset="0.369"/>
+                                            <GradientStop Color="#FFFFEB93" Offset="0.974"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Fill" TargetName="REC1" Value="{x:Null}"/>
+                                <Setter Property="Stroke" TargetName="REC1" Value="#FFFFB700"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--ESTILO PARA CABECERA DE COLUMNAS-->
+        <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#FF6B8E95" Offset="0"/>
+            <GradientStop Color="#FF14A7C1" Offset="1"/>
+            <GradientStop Color="#FF1E424E" Offset="0.509"/>
+            <GradientStop Color="#FF1D4855" Offset="0.542"/>
+            <GradientStop Color="#FF1D4855" Offset="0.542"/>
+            <GradientStop Color="#FF193A44" Offset="0.526"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="HeaderBorderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#FF1D1D1D" Offset="0.614"/>
+            <GradientStop Color="#FF007F96" Offset="0.853"/>
+            <GradientStop Color="#FF0AEAFA" Offset="1"/>
+        </LinearGradientBrush>
+        <Style x:Key="EstiloCabecera" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource HeaderBrush}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderBrush" Value="{StaticResource HeaderBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="25" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <!--ESTILO GRID SPLITER-->
+        <Style x:Key="GridSplitterPreviewStyle">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Fill="#80000000"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="EstiloGridSpliterCustom" TargetType="{x:Type GridSplitter}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            <Setter Property="PreviewStyle" Value="{StaticResource GridSplitterPreviewStyle}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridSplitter}">
+                        <Border x:Name="border" BorderThickness="1,0,0,0">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                    <GradientStop Offset="0"/>
+                                    <GradientStop Offset="1"/>
+                                    <GradientStop Color="#FFB2B2B2" Offset="0.08"/>
+                                    <GradientStop Color="#FFB2B2B2" Offset="0.908"/>
+                                    <GradientStop Color="#FFB2B2B2" Offset="0.476"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop/>
+                                    <GradientStop Offset="1"/>
+                                    <GradientStop Color="Gainsboro" Offset="0.3"/>
+                                    <GradientStop Color="Gainsboro" Offset="0.7"/>
+                                    <GradientStop Color="Gainsboro" Offset="0.5"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Disabled"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[2].(GradientStop.Offset)" Storyboard.TargetName="border">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.2"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[3].(GradientStop.Offset)" Storyboard.TargetName="border">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.8"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="border">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FF17ACFF"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[4].(GradientStop.Color)" Storyboard.TargetName="border">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FF17ACFF"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[3].(GradientStop.Color)" Storyboard.TargetName="border">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FF17ACFF"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[4].(GradientStop.Offset)" Storyboard.TargetName="border">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[4].(GradientStop.Color)" Storyboard.TargetName="border">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FF0073B2"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="border">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FF0073B2"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[3].(GradientStop.Color)" Storyboard.TargetName="border">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FF0073B2"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" SourceName="border" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop/>
+                                            <GradientStop Offset="1"/>
+                                            <GradientStop Color="#FF17ACFF" Offset="0.2"/>
+                                            <GradientStop Color="#FF17ACFF" Offset="0.8"/>
+                                            <GradientStop Color="#FF17ACFF" Offset="0.5"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="BorderBrush" TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Offset="0"/>
+                                            <GradientStop Offset="1"/>
+                                            <GradientStop Color="#FF0073B2" Offset="0.08"/>
+                                            <GradientStop Color="#FF0073B2" Offset="0.908"/>
+                                            <GradientStop Color="#FF0073B2" Offset="0.5"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </Application.Resources>
 </Application>

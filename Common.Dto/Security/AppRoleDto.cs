@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Common.Dto
 {
-    public class AppRoleDto : AuditEntityDto
+    public class AppRoleDto : AuditEntityDto<long>
     {
         //Implentacion solo para seleccion  
         public bool IsSelected { get; set; }

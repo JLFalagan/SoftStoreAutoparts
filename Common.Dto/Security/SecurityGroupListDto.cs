@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public class SecurityGroupListDto : IEntity
+    public class SecurityGroupListDto : IKey<long>
     {
         public long Id { get; set; }
 

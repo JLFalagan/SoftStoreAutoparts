@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Common.Dto
 {
-    public class ItemDto : IEntity
+    public class ItemDto : IKey<long>
     {
         public long Id { get; set; }
 
@@ -13,9 +13,6 @@ namespace Common.Dto
         public string Text { get; set; }
 
         [JsonIgnore]
-        public string Display
-        {
-            get { return Text; }
-        }
+        public string Display => Text;
     }
 }

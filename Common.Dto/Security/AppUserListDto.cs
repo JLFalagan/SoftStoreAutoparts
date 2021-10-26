@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public partial class AppUserListDto : IEntity
+    public partial class AppUserListDto : IKey<long>
     {
         public long Id { get; set; }
 

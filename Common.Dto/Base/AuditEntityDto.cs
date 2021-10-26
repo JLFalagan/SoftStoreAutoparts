@@ -10,19 +10,17 @@ namespace Common.Dto
 {
     public abstract class AuditEntityDto<T> : BaseEntityNotifyDto<T>
     {
-        //Constructor Default, con las notificaciones this y base deshabilitadas
         public AuditEntityDto() : base()
         {
-            EnableCreatedBy = false;
-            EnableUpdatedBy = false;
-            EnableDeletedBy = false;
-            EnableCreated = false;
-            EnableUpdated = false;
-            EnableDeleted = false;
+            EnableNotifyAuditAll(false);
         }
 
-        //Constructor con las notificaciones this y base habilitadas
-        public AuditEntityDto(bool enableNotify = false) : base(enableNotify)
+        public AuditEntityDto(bool enableNotify = false)
+        {
+            EnableNotifyAuditAll(enableNotify);
+        }
+
+        public virtual void EnableNotifyAuditAll(bool enableNotify)
         {
             EnableCreatedBy = enableNotify;
             EnableUpdatedBy = enableNotify;
@@ -30,32 +28,6 @@ namespace Common.Dto
             EnableCreated = enableNotify;
             EnableUpdated = enableNotify;
             EnableDeleted = enableNotify;
-        }
-
-        //Constructor con las notificaciones this y base habilitadas de manera independiente
-        public AuditEntityDto(bool enableAuditNotify = false, bool enableBaseNotify = false) : base(enableBaseNotify)
-        {
-            EnableCreatedBy = enableAuditNotify;
-            EnableUpdatedBy = enableAuditNotify;
-            EnableDeletedBy = enableAuditNotify;
-            EnableCreated = enableAuditNotify;
-            EnableUpdated = enableAuditNotify;
-            EnableDeleted = enableAuditNotify;
-        }
-
-        public void EnableNotify(bool enableAuditNotify = false, bool enableBaseNotify = false)
-        {
-            base.EnableNotifyGuid = enableBaseNotify;
-            base.EnableNotifyEnabled = enableBaseNotify;
-            base.EnableNotifyIsNew = enableBaseNotify;
-            base.EnableNotifyDisplay = enableBaseNotify;
-
-            EnableCreatedBy = enableAuditNotify;
-            EnableUpdatedBy = enableAuditNotify;
-            EnableDeletedBy = enableAuditNotify;
-            EnableCreated = enableAuditNotify;
-            EnableUpdated = enableAuditNotify;
-            EnableDeleted = enableAuditNotify;
         }
 
         //[JsonIgnore]

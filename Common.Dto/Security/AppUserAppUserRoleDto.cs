@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public class AppUserAppUserRoleDto : AuditEntityDto
+    public class AppUserAppUserRoleDto : AuditEntityDto<long>
     {
         public AppUserAppUserRoleDto() : base()
         {

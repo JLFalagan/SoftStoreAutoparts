@@ -6,19 +6,14 @@ using System.Threading.Tasks;
 
 namespace Common.Dto
 {
-    public abstract class BaseTypeDto<T> : BaseEntityNotifyDto<T>
+    public abstract class BaseTypeDto<T> : BaseEntityNotifyDto<T>, INamedEntity
     {
         public BaseTypeDto() : base()
         {
             EnableName = false;
         }
 
-        public BaseTypeDto(bool enableNotify = false) : base(enableNotify)
-        {
-            EnableName = enableNotify;
-        }
-
-        public BaseTypeDto(bool enableNotify = false, bool enableBaseNotify = false) : base(enableBaseNotify)
+        public BaseTypeDto(bool enableNotify = false)
         {
             EnableName = enableNotify;
         }

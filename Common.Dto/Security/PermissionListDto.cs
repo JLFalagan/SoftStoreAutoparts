@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 { 
-    public class PermissionListDto : IEntity
+    public class PermissionListDto : IKey<long>
     {
         public long Id { get; set; }
 

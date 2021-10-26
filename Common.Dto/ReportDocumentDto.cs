@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 { 
-    public class ReportDocumentDto : IEntity
+    public class ReportDocumentDto : IKey<long>
     {
         public ReportDocumentDto()
         {

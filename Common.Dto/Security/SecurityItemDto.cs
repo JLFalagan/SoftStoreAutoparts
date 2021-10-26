@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public partial class SecurityItemDto : AuditEntityDto
+    public partial class SecurityItemDto : AuditEntityDto<long>
     {
         
         public SecurityItemDto() { }

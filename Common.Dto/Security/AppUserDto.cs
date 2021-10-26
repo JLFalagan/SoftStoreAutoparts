@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Dto
 {
-    public partial class AppUserDto : AuditEntityDto
+    public partial class AppUserDto : AuditEntityDto<long>
     {
         public const int PasswordFormatClear = 1;
         public const int PasswordFormatEncrypted = 2;
